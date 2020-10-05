@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using AspNetCore_Giris.Types
+
+@model UserFormViewModel
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <form asp-formhelper="true" asp-controller="User" asp-action="Save" method="post" asp-callback="callbackfunction">
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <input type="text" class="form-control" asp-for="FirstName">
+                    <span asp-validation-for="FirstName" class="form-text text-muted text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName"></label>
+                    <input type="text" class="form-control" asp-for="LastName">
+                    <span asp-validation-for="LastName" class="form-text text-muted text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ad</th>
+            <th scope="col">Soyad</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            var users = (List<RegisteredUser>)ViewBag.Users;
+
+            foreach (var item in users)
+            {
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+<script>
+    function callbackfunction() {
+        alert("tetiklendi!");
+    }
+</script>
